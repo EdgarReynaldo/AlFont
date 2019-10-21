@@ -8,3 +8,12 @@ All code not including updates from me is copyright of the respective authors. I
 Source code tree starts with AlFont 2.0.9 and a critical patch included that fixes a crash bug.
 
 See http://opensnc.sourceforge.net/alfont/ for details.
+
+Original Authors
+-------
+
+Javier Gonzalez : Made the main API
+
+Doug Eleveld : Made many speed improvements to the library
+
+Chernsha : Added the function for font since v2.0.0
