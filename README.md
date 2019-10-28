@@ -9,6 +9,8 @@ Source code tree starts with AlFont 2.0.9 and a critical patch included that fix
 
 See http://opensnc.sourceforge.net/alfont/ for details.
 
+AlFont now builds with CMake, including an install target. Supported builds are debug and release mode dynamic and static libraries.
+
 Original Authors
 -------
 
