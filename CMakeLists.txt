@@ -5,8 +5,6 @@ project(ALFONT)
 
 set(DEPDIR "../../distro" CACHE PATH "Where the dependencies are installed")
 
-set(CMAKE_INSTALL_PREFIX "${DEPDIR}")
-
 set(FREETYPE2_INCDIR "${DEPDIR}/include/freetype2" CACHE PATH "Where to find headers for Freetype2")
 
 set(FREETYPE2_LIBDIR "${DEPDIR}/lib" CACHE PATH "Where to find Freetype2 library.")
