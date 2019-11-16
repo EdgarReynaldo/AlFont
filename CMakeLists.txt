@@ -5,6 +5,8 @@ project(ALFONT)
 
 set(DEPDIR "../../distro" CACHE PATH "Where the dependencies are installed")
 
+set(CMAKE_INSTALL_PREFIX "${DEPDIR}")
+
 set(FREETYPE2_INCDIR "${DEPDIR}/include/freetype2" CACHE PATH "Where to find headers for Freetype2")
 
 set(FREETYPE2_LIBDIR "${DEPDIR}/lib" CACHE PATH "Where to find Freetype2 library.")
@@ -18,13 +20,14 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
    add_library(AlFontSharedDebug SHARED src/alfont.c)
 
    add_library(AlFontDebug STATIC src/alfont.c)
-
+   target_compile_definitions(AlFontDebug PUBLIC "-DALLEGRO_STATICLINK")
 
 else()
 
    add_library(AlFontShared SHARED src/alfont.c)
 
    add_library(AlFont STATIC src/alfont.c)
+   target_compile_definitions(AlFont PUBLIC "-DALLEGRO_STATICLINK")
 
 endif(CMAKE_BUILD_TYPE STREQUAL "Debug")
 
@@ -53,14 +56,19 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
    target_include_directories(AlFontDebug PUBLIC ${FREETYPE2_INCDIR})
    target_include_directories(AlFontDebug PUBLIC include)
 
-   target_link_libraries(AlFontSharedDebug ${ALLEGRO4_DEBUG})
-   target_link_libraries(AlFontSharedDebug ${FREETYPE2_LIB})
-   target_link_libraries(AlFontSharedDebug ${LIBPNG})
-   target_link_libraries(AlFontSharedDebug ${ZLIB})
+   target_link_libraries(AlFontSharedDebug PUBLIC "${ALLEGRO4_DEBUG}")
+   target_link_libraries(AlFontSharedDebug PUBLIC "${FREETYPE2_LIB}")
+   target_link_libraries(AlFontSharedDebug PUBLIC "${LIBPNG}")
+   target_link_libraries(AlFontSharedDebug PUBLIC "${ZLIB}")
 
+   add_executable(Example1 examples/example1.c)
+
+   target_link_libraries(Example1 PUBLIC AlFontSharedDebug)
+   
    install(TARGETS AlFontSharedDebug DESTINATION "${CMAKE_INSTALL_PREFIX}/lib")
    install(TARGETS AlFontDebug DESTINATION "${CMAKE_INSTALL_PREFIX}/lib")
 
+   
 else()
 
    target_include_directories(AlFontShared PUBLIC ${ALLEGRO4_INCDIR})
@@ -71,11 +79,15 @@ else()
    target_include_directories(AlFont PUBLIC ${FREETYPE2_INCDIR})
    target_include_directories(AlFont PUBLIC include)
 
-   target_link_libraries(AlFontShared ${ALLEGRO4_RELEASE})
-   target_link_libraries(AlFontShared ${FREETYPE2_LIB})
-   target_link_libraries(AlFontShared ${LIBPNG})
-   target_link_libraries(AlFontShared ${ZLIB})
+   target_link_libraries(AlFontShared PUBLIC "${ALLEGRO4_RELEASE}")
+   target_link_libraries(AlFontShared PUBLIC "${FREETYPE2_LIB}")
+   target_link_libraries(AlFontShared PUBLIC "${LIBPNG}")
+   target_link_libraries(AlFontShared PUBLIC "${ZLIB}")
 
+   add_executable(Example1 examples/example1.c)
+
+   target_link_libraries(Example1 PUBLIC AlFontShared)
+   
    install(TARGETS AlFontShared DESTINATION "${CMAKE_INSTALL_PREFIX}/lib")
    install(TARGETS AlFont DESTINATION "${CMAKE_INSTALL_PREFIX}/lib")
 
