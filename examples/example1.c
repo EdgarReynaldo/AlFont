@@ -134,7 +134,7 @@ printf("%s", "the unicode conversion is required for SAMPLE_TEXT string.");
 #endif
 }
 
-alfont_ugetxc(user_font, &SAMPLE_TEXT);	
+alfont_ugetxc(user_font, (const char**)&SAMPLE_TEXT);	
 alfont_textout_aa(screen, user_font, SAMPLE_TEXT, 0, 0, makecol(255,255,255));
 alfont_textout(screen, user_font, SAMPLE_TEXT, 0, 30, makecol(255,255,255));
 
